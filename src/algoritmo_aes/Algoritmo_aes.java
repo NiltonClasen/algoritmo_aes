@@ -7,15 +7,16 @@ package algoritmo_aes;
 
 /**
  *
- * @author Nilton
+ * @author Nilton, Gustavo e Kienen
  */
 public class Algoritmo_aes {
 
-    /**
-     * @param args the command line arguments
-     */
+    private static Arquivo arquivo = new Arquivo();
+    private static GeraChave geraChave = new GeraChave();
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+        String chave = arquivo.requisitarChave();
+        geraChave.geraChave(chave);
     }
     
 }
