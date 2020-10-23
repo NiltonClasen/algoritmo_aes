@@ -15,8 +15,8 @@ public class Algoritmo_aes {
     private static GeraChave geraChave = new GeraChave();
     
     public static void main(String[] args) {
-        String chave = arquivo.requisitarChave();
-        geraChave.geraChave(chave);
+        int[] iChave = arquivo.requisitarChave();
+        geraChave.geraChaveMatriz(iChave);
     }
     
 }
