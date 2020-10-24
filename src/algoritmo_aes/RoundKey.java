@@ -13,6 +13,7 @@ class RoundKey {
 
     private static final int TAMANHO_MATRIZ = 4;
     private String[][] matrizChave = new String[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
+    private static final KeyUtils keyUtils = new KeyUtils();
 
     public RoundKey() {
     }
@@ -41,12 +42,25 @@ class RoundKey {
         }
     }
 
+    //retorna a palavra de acordo com a roundKey passada
     public String[] getWord(String[][] roundKey, int iColuna) {
         String[] aWord = new String[TAMANHO_MATRIZ];
 
         int iSomatorio = 0;
         for (int idx = 0; idx < TAMANHO_MATRIZ; idx++) {
             aWord[idx] = roundKey[iSomatorio++][iColuna];
+        }
+
+        return aWord;
+    }
+
+    //retorna a palavra da roundKey atual
+    public String[] getWord(int iColuna) {
+        String[] aWord = new String[TAMANHO_MATRIZ];
+
+        int iSomatorio = 0;
+        for (int idx = 0; idx < TAMANHO_MATRIZ; idx++) {
+            aWord[idx] = matrizChave[iSomatorio++][iColuna];
         }
 
         return aWord;
@@ -60,23 +74,11 @@ class RoundKey {
             String[] aWord2 = getWord(this.matrizChave, iPegaWord);
             iPegaWord++;
 
-            String[] aWordXOR = FazOperacaoXOR(aWord1, aWord2);
+            String[] aWordXOR = keyUtils.fazOperacaoXOR(aWord1, aWord2);
             PreencheMatriz(iColuna++, aWordXOR);
         }
     }
-
-    public String[] FazOperacaoXOR(String[] aWord1, String[] aWord2) {
-        String[] aWordXOR = new String[TAMANHO_MATRIZ];
-
-        for (int idx = 0; idx < TAMANHO_MATRIZ; ++idx) {
-            int iHex1 = Integer.parseInt(aWord1[idx], 16);
-            int iHex2 = Integer.parseInt(aWord2[idx], 16);
-            aWordXOR[idx] = Integer.toHexString(iHex1 ^ iHex2);
-        }
-
-        return aWordXOR;
-    }
-
+    
     private void PreencheMatriz(int iColuna, String[] aWordXOR) {
         for (int idx = 0; idx < TAMANHO_MATRIZ; ++idx) {
             this.matrizChave[idx][iColuna] = aWordXOR[idx];
