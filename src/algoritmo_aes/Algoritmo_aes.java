@@ -5,6 +5,8 @@
  */
 package algoritmo_aes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Nilton, Gustavo e Kienen
@@ -12,11 +14,21 @@ package algoritmo_aes;
 public class Algoritmo_aes {
 
     private static Arquivo arquivo = new Arquivo();
-    private static GeraChave geraChave = new GeraChave();
-    
+    private static int debug = 1;
+    private ArrayList<RoundKey> roundKeys = new ArrayList<>();
+    private static RoundKey chaveGerador;
+
     public static void main(String[] args) {
-        int[] iChave = arquivo.requisitarChave();
-        geraChave.geraChaveMatriz(iChave);
+        chaveGerador = new RoundKey(arquivo.requisitarChave());
+
+        if (debug == 1) {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    System.out.print("[" + chaveGerador.getRoundKey()[i][j] + "]");
+                }
+                System.out.print("\n");
+            }
+        }
     }
-    
+
 }
