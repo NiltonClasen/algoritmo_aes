@@ -12,31 +12,76 @@ package algoritmo_aes;
 class RoundKey {
 
     private static final int TAMANHO_MATRIZ = 4;
-    //ArrayList<byte> matrizChave = new ArrayList<byte>();
+    private String[][] matrizChave = new String[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
 
-    private int[][] matrizChave = new int[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
+    public RoundKey() {
+    }
 
-    public RoundKey(int[] iTexto) {
+    public RoundKey(String[] sTexto) {
         int iSomatorio = 0;
         for (int idxLinha = 0; idxLinha < TAMANHO_MATRIZ; ++idxLinha) {
             for (int idxColuna = 0; idxColuna < TAMANHO_MATRIZ; ++idxColuna) {
-                matrizChave[idxColuna][idxLinha] = iTexto[iSomatorio++];
+                matrizChave[idxColuna][idxLinha] = sTexto[iSomatorio++];
             }
         }
     }
 
-    public int[][] getRoundKey() {
+    public RoundKey(String[][] chaveCompleta) {
+        matrizChave = chaveCompleta;
+    }
+
+    public String[][] getRoundKey() {
         return this.matrizChave;
     }
 
-    public int[] getWord(int iColuna) {
-        int[] iWord = new int[4];
+    public void setWord(String[] aWordDesejada, int iColuna) {
+        int iSomatorio = 0;
+        for (int idx = 0; idx < TAMANHO_MATRIZ; idx++) {
+            this.matrizChave[iSomatorio++][iColuna] = aWordDesejada[idx];
+        }
+    }
+
+    public String[] getWord(String[][] roundKey, int iColuna) {
+        String[] aWord = new String[TAMANHO_MATRIZ];
 
         int iSomatorio = 0;
-        for (int idx = 0; idx < 4; idx++) {
-            iWord[idx] = this.matrizChave[iSomatorio++][iColuna];
+        for (int idx = 0; idx < TAMANHO_MATRIZ; idx++) {
+            aWord[idx] = roundKey[iSomatorio++][iColuna];
         }
 
-        return iWord;
+        return aWord;
+    }
+
+    public void setNovaRoundKey(RoundKey roundKeyAnterior) {
+        String[][] roundKeyAtual = new String[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
+
+        int iPegaWord = 0;
+        int iColuna = 1;
+        for (int idx = 0; idx < 3; ++idx) {
+            String[] aWord1 = getWord(roundKeyAnterior.getRoundKey(), iPegaWord + 1);
+            String[] aWord2 = getWord(this.matrizChave, iPegaWord);
+            iPegaWord++;
+
+            String[] aWordXOR = FazOperacaoXOR(aWord1, aWord2);
+            PreencheMatriz(iColuna++, aWordXOR);
+        }
+    }
+
+    private String[] FazOperacaoXOR(String[] aWord1, String[] aWord2) {
+        String[] aWordXOR = new String[TAMANHO_MATRIZ];
+
+        for (int idx = 0; idx < TAMANHO_MATRIZ; ++idx) {
+            int iHex1 = Integer.parseInt(aWord1[idx], 16);
+            int iHex2 = Integer.parseInt(aWord2[idx], 16);
+            aWordXOR[idx] = Integer.toHexString(iHex1 ^ iHex2);
+        }
+
+        return aWordXOR;
+    }
+
+    private void PreencheMatriz(int iColuna, String[] aWordXOR) {
+        for (int idx = 0; idx < TAMANHO_MATRIZ; ++idx) {
+            this.matrizChave[idx][iColuna] = aWordXOR[idx];
+        }
     }
 }

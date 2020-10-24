@@ -27,16 +27,16 @@ public class Arquivo {
         }
     }
 
-    public int[] requisitarChave() {
+    public String[] requisitarChave() {
         //realizar tratamento p digitar mais que 16
         //return JOptionPane.showInputDialog("Digite a chave em bytes, separados por vírgula").trim();
-        String sTexto = "40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56";
+        String sTexto = "65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80";
         String[] sTextoSeparado = sTexto.split(",");
-        int[] iValores = new int[16];
         for (int idx = 0; idx < 16; ++idx) {
-            iValores[idx] = Integer.parseInt(sTextoSeparado[idx]);
+            sTextoSeparado[idx] = Integer.toHexString(Integer.parseInt(sTextoSeparado[idx]));
         }
-        return iValores;
+        
+        return sTextoSeparado;
     }
 
     public void criptografarArquivo() {
