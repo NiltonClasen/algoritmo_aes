@@ -29,6 +29,9 @@ public class Algoritmo_aes {
                 System.out.print("\n");
             }
         }
+        
+        
+        int[] i = chaveGerador.getWord(1);
     }
 
 }

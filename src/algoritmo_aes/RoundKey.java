@@ -24,7 +24,19 @@ class RoundKey {
             }
         }
     }
-    public int[][] getRoundKey(){
+
+    public int[][] getRoundKey() {
         return this.matrizChave;
+    }
+
+    public int[] getWord(int iColuna) {
+        int[] iWord = new int[4];
+
+        int iSomatorio = 0;
+        for (int idx = 0; idx < 4; idx++) {
+            iWord[idx] = this.matrizChave[iSomatorio++][iColuna];
+        }
+
+        return iWord;
     }
 }
