@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Nilton, Gustavo e Kienen
  */
 public class Algoritmo_aes {
-    private static int QTD_ROUND_KEY = 11;
+    private static int QTD_ROUND_KEY = 10;
     private static Arquivo arquivo = new Arquivo();
     private static int DEBUG = 0;
     private static ArrayList<RoundKey> roundKeys = new ArrayList<>();
@@ -31,7 +31,6 @@ public class Algoritmo_aes {
             }
         }
 
-        //Gera chave complicada
         String[] wordComplicada = {"6f", "c6", "10", "a7"};
         RoundKey RoundKeyInicial = new RoundKey();
         RoundKeyInicial.setWord(wordComplicada, 0);
@@ -40,6 +39,11 @@ public class Algoritmo_aes {
             RoundKeyInicial.setNovaRoundKey(roundKeys.get(roundKeys.size() - 1));
             roundKeys.add(RoundKeyInicial);
         }
+        
+        
+        //Le informações do arquivo e deixa em HexaDecimal
+        String[] textoSimples = {"44", "45", "53", "45", "4e", "56", "4f", "4c", "56", "49", "4d", "45", "4e", "54", "4f", "21"};
+        CriptografiaArquivo criptArquivo = new CriptografiaArquivo(textoSimples);
+        criptArquivo.IniciaCriptogrfia(roundKeys.get(0));
     }
-
 }

@@ -53,8 +53,6 @@ class RoundKey {
     }
 
     public void setNovaRoundKey(RoundKey roundKeyAnterior) {
-        String[][] roundKeyAtual = new String[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
-
         int iPegaWord = 0;
         int iColuna = 1;
         for (int idx = 0; idx < 3; ++idx) {
@@ -67,7 +65,7 @@ class RoundKey {
         }
     }
 
-    private String[] FazOperacaoXOR(String[] aWord1, String[] aWord2) {
+    public String[] FazOperacaoXOR(String[] aWord1, String[] aWord2) {
         String[] aWordXOR = new String[TAMANHO_MATRIZ];
 
         for (int idx = 0; idx < TAMANHO_MATRIZ; ++idx) {

@@ -39,7 +39,14 @@ public class KeyUtils {
         int numero1, numero2;
         for (int i = 0; i < palavraA.length; i++) {
             numero1 = Integer.parseInt(String.valueOf(palavraA[i].charAt(0)), 16);
-            numero2 = Integer.parseInt(String.valueOf(palavraA[i].charAt(1)), 16);
+
+            if (palavraA[i].length() == 1) {
+                numero2 = numero1;
+                numero1 = 0;
+            } else {
+                numero2 = Integer.parseInt(String.valueOf(palavraA[i].charAt(1)), 16);
+            }
+
             palavraA[i] = Integer.toHexString(sbox.getValor(numero1, numero2));
         }
         return palavraA;
