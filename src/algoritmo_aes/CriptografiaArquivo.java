@@ -32,6 +32,7 @@ public class CriptografiaArquivo {
 
         RealizaSubBytes();
         RealizaShiftRows();
+        RealizaMixColumns();
     }
 
     private void RealizaSubBytes() {
@@ -48,15 +49,19 @@ public class CriptografiaArquivo {
                 sTextoArquivoNovo[idx] = sValor;
                 continue;
             }
-            
-            int iMover = iMovimentacao[(idx % 4) - 1];
-            
-            if (iMover > 15)
-                iMover -= 15;
 
-            sTextoArquivoNovo[iMover + 1] = sValor;
+            int iMover = iMovimentacao[(idx % 4) - 1];
+
+            if (iMover + idx > 15) {
+                iMover -= 16;
+            }
+
+            sTextoArquivoNovo[iMover + idx] = sValor;
         }
-        KeyUtils keyUtils = new KeyUtils();
-        sTextoArquivo = keyUtils.subsWord(sTextoArquivo);
+        sTextoArquivo = sTextoArquivoNovo;
+    }
+
+    private void RealizaMixColumns() {
+
     }
 }
