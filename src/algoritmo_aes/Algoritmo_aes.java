@@ -44,9 +44,9 @@ public class Algoritmo_aes {
             logger(RoundKeyInicial, null, "RoundKey adicionada");
         }
         //Le informações do arquivo e deixa em HexaDecimal
-        String[] textoSimples = {"44", "45", "53", "45", "4e", "56", "4f", "4c", "56", "49", "4d", "45", "4e", "54", "4f", "21"};
-        CriptografiaArquivo criptArquivo = new CriptografiaArquivo(textoSimples);
-        criptArquivo.IniciaCriptogrfia(roundKeys.get(0));
+        String[][] textoSimples = {{"44", "45", "53", "45"}, {"4e", "56", "4f", "4c"}, {"56", "49", "4d", "45"}, {"4e", "54", "4f", "21"}};
+        CriptografiaArquivo criptArquivo = new CriptografiaArquivo();
+        criptArquivo.IniciaCriptogrfia(textoSimples, roundKeys);
     }
 
     public static void logger(RoundKey roundkey, String[] word, String etapa) {
