@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class Algoritmo_aes {
 
-    private static int QTD_ROUND_KEY = 10;
-    private static Arquivo arquivo = new Arquivo();
-    private static int DEBUG = 1;
-    private static ArrayList<RoundKey> roundKeys = new ArrayList<>();
+    private static final int QTD_ROUND_KEY = 10;
+    private static final Arquivo arquivo = new Arquivo();
+    private static final int DEBUG = 1;
+    private static final ArrayList<RoundKey> roundKeys = new ArrayList<>();
     private static RoundKey chaveGerador;
-    private static KeyUtils keyUtils = new KeyUtils();
+    private static final KeyUtils keyUtils = new KeyUtils();
 
     public static void main(String[] args) {
         chaveGerador = new RoundKey(arquivo.requisitarChave());
@@ -43,10 +43,19 @@ public class Algoritmo_aes {
             roundKeys.add(RoundKeyInicial);
             logger(RoundKeyInicial, null, "RoundKey adicionada");
         }
-        //Le informações do arquivo e deixa em HexaDecimal
-        String[][] textoSimples = {{"44", "45", "53", "45"}, {"4e", "56", "4f", "4c"}, {"56", "49", "4d", "45"}, {"4e", "54", "4f", "21"}};
+        //Le o arquivo, pega os primeiros 16bytes, transformar os 16bytes
+        //em hexadecimal como exemplo abaixo e enviar para o processo de cifragem
+        //Fazer este processo até o final do arquivo. No último bloco lembrar de ver o PKCS#5,
+        //que é preencher o bloco até ficar com 16bytes. Se o último bloco fechar 16 certinho, vai
+        //precisar criar um novo bloco todo preenchido pelo PKCS#5.
+        //for(){
+        String[][] textoSimples = {{"44", "45", "53", "45"},
+                                   {"4e", "56", "4f", "4c"},
+                                   {"56", "49", "4d", "45"},
+                                   {"4e", "54", "4f", "21"}};
         CriptografiaArquivo criptArquivo = new CriptografiaArquivo();
-        criptArquivo.IniciaCriptogrfia(textoSimples, roundKeys);
+        criptArquivo.IniciaCriptografia(textoSimples, roundKeys);
+        //}
     }
 
     public static void logger(RoundKey roundkey, String[] word, String etapa) {

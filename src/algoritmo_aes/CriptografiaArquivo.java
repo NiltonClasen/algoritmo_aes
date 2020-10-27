@@ -15,7 +15,7 @@ import sun.security.util.KeyUtil;
  */
 public class CriptografiaArquivo {
 
-    public void IniciaCriptogrfia(String[][] sTextoSimples, ArrayList<RoundKey> roundKeys) {
+    public void IniciaCriptografia(String[][] sTextoSimples, ArrayList<RoundKey> roundKeys) {
         String[][] sCriptografado = new String[4][4];
 
         for (int idxLinha = 0; idxLinha < 4; ++idxLinha) {
