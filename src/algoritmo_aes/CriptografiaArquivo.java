@@ -26,10 +26,13 @@ public class CriptografiaArquivo {
             }
         }
 
-        for (int idxRoundKeys = 0; idxRoundKeys < 8; ++idxRoundKeys) {
+        for (int idxRoundKeys = 0; idxRoundKeys < 10; ++idxRoundKeys) {
             sCriptografado = RealizaSubBytes(sCriptografado);
             sCriptografado = RealizaShiftRows(sCriptografado);
-            sCriptografado = RealizaMixColumns(sCriptografado, roundKeys.get(idxRoundKeys + 1));
+            if (idxRoundKeys < 9)
+                sCriptografado = RealizaMixColumns(sCriptografado);
+            
+            sCriptografado = MixColumnRoundKey(sCriptografado, roundKeys.get(idxRoundKeys + 1).getRoundKey());
         }
     }
 
@@ -78,7 +81,7 @@ public class CriptografiaArquivo {
         return sCriptografado;
     }
 
-    private String[][] RealizaMixColumns(String[][] sCriptografado, RoundKey roundKey) {
+    private String[][] RealizaMixColumns(String[][] sCriptografado) {
         String[][] sMatrizMultiplicacao = {{"02", "03", "01", "01"}, {"01", "02", "03", "01"}, {"01", "01", "02", "03"}, {"03", "01", "01", "02"}};
         String[][] sMatrizResultante = new String[4][4];
         String[][] sMatrizShiftRows = sCriptografado;
@@ -94,7 +97,7 @@ public class CriptografiaArquivo {
             }
         }
 
-        return MixColumnRoundKey(sMatrizResultante, roundKey.getRoundKey());
+        return sMatrizResultante;
     }
 
     private String GeraGalois(int idxLinha, int idxColuna, int idxGalois, String[][] sMatrizMultiplicacao, String[][] sMatrizShiftRows) {
@@ -111,10 +114,14 @@ public class CriptografiaArquivo {
         int iMult1 = Integer.parseInt(String.valueOf(sMatrizMultiplicacao[idxLinha][idxGalois].charAt(0)), 16);;
         int iMult2 = Integer.parseInt(String.valueOf(sMatrizMultiplicacao[idxLinha][idxGalois].charAt(1)), 16);
 
-        if (iMult2 == 0) {
+        if ((iValor1 == 0 && iValor2 == 0) || (iMult1 == 0 && iMult2 == 0)) {
             return "0";
-        } else if (iMult2 == 1) {
-            return sMatrizShiftRows[idxColuna][idxGalois];
+        } else {
+            if (iValor1 == 0 && iValor2 == 1) {
+                return sMatrizMultiplicacao[idxLinha][idxGalois];
+            } else if (iMult1 == 0 && iMult2 == 1) {
+                return sMatrizShiftRows[idxColuna][idxGalois];
+            }
         }
 
         int iResultado = Constants.getValorTabelaL(iValor1, iValor2) + Constants.getValorTabelaL(iMult1, iMult2);
