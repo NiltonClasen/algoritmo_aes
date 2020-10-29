@@ -33,7 +33,6 @@ public class CriptografiaArquivo {
                 sCriptografado = RealizaMixColumns(sCriptografado);
             
             sCriptografado = MixColumnRoundKey(sCriptografado, roundKeys.get(idxRoundKeys + 1).getRoundKey());
-            boolean b = false;
         }
         
         return sCriptografado;
