@@ -15,7 +15,7 @@ import sun.security.util.KeyUtil;
  */
 public class CriptografiaArquivo {
 
-    public void IniciaCriptografia(String[][] sTextoSimples, ArrayList<RoundKey> roundKeys) {
+    public String[][] IniciaCriptografia(String[][] sTextoSimples, ArrayList<RoundKey> roundKeys) {
         String[][] sCriptografado = new String[4][4];
 
         for (int idxLinha = 0; idxLinha < 4; ++idxLinha) {
@@ -35,6 +35,8 @@ public class CriptografiaArquivo {
             sCriptografado = MixColumnRoundKey(sCriptografado, roundKeys.get(idxRoundKeys + 1).getRoundKey());
             boolean b = false;
         }
+        
+        return sCriptografado;
     }
 
     private String[][] RealizaSubBytes(String[][] sCriptografado) {
@@ -75,7 +77,7 @@ public class CriptografiaArquivo {
         idxNovo = 0;
         for (int idxLinha = 0; idxLinha < 4; ++idxLinha) {
             for (int idxColuna = 0; idxColuna < 4; ++idxColuna, ++idxNovo) {
-                sCriptografado[idxLinha][idxColuna] = sTextoNovo[idxNovo];
+                sCriptografado[idxColuna][idxLinha] = sTextoNovo[idxNovo];
             }
         }
 
@@ -102,14 +104,14 @@ public class CriptografiaArquivo {
     }
 
     private String GeraGalois(int idxLinha, int idxColuna, int idxGalois, String[][] sMatrizMultiplicacao, String[][] sMatrizShiftRows) {
-        int iValor1 = Integer.parseInt(String.valueOf(sMatrizShiftRows[idxColuna][idxGalois].charAt(0)), 16);
+        int iValor1 = Integer.parseInt(String.valueOf(sMatrizShiftRows[idxGalois][idxColuna].charAt(0)), 16);
         int iValor2 = 0;
 
-        if (sMatrizShiftRows[idxColuna][idxGalois].length() == 1) {
+        if (sMatrizShiftRows[idxGalois][idxColuna].length() == 1) {
             iValor2 = iValor1;
             iValor1 = 0;
         } else {
-            iValor2 = Integer.parseInt(String.valueOf(sMatrizShiftRows[idxColuna][idxGalois].charAt(1)), 16);
+            iValor2 = Integer.parseInt(String.valueOf(sMatrizShiftRows[idxGalois][idxColuna].charAt(1)), 16);
         }
 
         int iMult1 = Integer.parseInt(String.valueOf(sMatrizMultiplicacao[idxLinha][idxGalois].charAt(0)), 16);;
@@ -121,7 +123,7 @@ public class CriptografiaArquivo {
             if (iValor1 == 0 && iValor2 == 1) {
                 return sMatrizMultiplicacao[idxLinha][idxGalois];
             } else if (iMult1 == 0 && iMult2 == 1) {
-                return sMatrizShiftRows[idxColuna][idxGalois];
+                return sMatrizShiftRows[idxGalois][idxColuna];
             }
         }
 

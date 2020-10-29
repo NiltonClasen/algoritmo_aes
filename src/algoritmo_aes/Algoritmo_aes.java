@@ -54,7 +54,7 @@ public class Algoritmo_aes {
                                    {"56", "49", "4d", "45"},
                                    {"4e", "54", "4f", "21"}};
         CriptografiaArquivo criptArquivo = new CriptografiaArquivo();
-        criptArquivo.IniciaCriptografia(textoSimples, roundKeys);
+        String[][] sCriptografado = criptArquivo.IniciaCriptografia(textoSimples, roundKeys);
         //}
     }
 
