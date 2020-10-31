@@ -22,32 +22,36 @@ public class Utils {
     }
 
     public static byte[][] divideArray(byte[] source, int chunksize) {
-
-        byte[][] ret = new byte[(int) Math.ceil(source.length / (double) chunksize)][chunksize];
-
+        boolean novoBloco = source.length % (double) chunksize == 0;
+        int qtdLinhas = (int) Math.ceil(source.length / (double) chunksize);
+        if(novoBloco){
+            qtdLinhas++;
+        }
+        byte[][] ret = new byte[qtdLinhas][chunksize];
         int start = 0;
 
         for (int i = 0; i < ret.length; i++) {
+            Integer countZero = 0;
             ret[i] = Arrays.copyOfRange(source, start, start + chunksize);
             start += chunksize;
             //teoricamente aqui é o isso identifica o último bloco
-//            if (ret.length == i + 1) {
-//                for (byte[] bs : ret[i]) {
-//                    Integer qtdeZeros = 0;
-//                    //pegas as posições que é 0 e conta quanto faltou pra completar
-//                    for (int j = 0; j < bs.length; j++) {
-//                        if (bs[j] == 0) {
-//                            qtdeZeros++;
-//                        }
-//                    }
-//                    //agora faz outro for pra substituir o 0 pelo número que falta kkkk
-//                    for (int j = 0; j < bs.length; j++) {
-//                        bs[j] = qtdeZeros.byteValue();
-//                    }    
-//                }
-//            }
+            if (ret.length == i + 1) {
+                //percorrer toda a linha e ver quantos zeros existem
+                for (int idx = 0; idx < chunksize; idx++) {
+                    byte byteIdx = ret[i][idx];
+                    if(byteIdx == 0){
+                        countZero++;
+                    }  
+                }
+                //percorer novamente toda a linha e setar o pkcs5#
+                for (int idx = 0; idx < chunksize; idx++) {
+                    byte byteIdx = ret[i][idx];
+                    if (byteIdx == 0) {
+                        ret[i][idx] = countZero.byteValue();
+                    }
+                }
+            }
         }
-
         return ret;
     }
 }
