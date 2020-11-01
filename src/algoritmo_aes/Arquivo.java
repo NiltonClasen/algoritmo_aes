@@ -5,7 +5,10 @@
  */
 package algoritmo_aes;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -35,11 +38,24 @@ public class Arquivo {
         for (int idx = 0; idx < 16; ++idx) {
             sTextoSeparado[idx] = Integer.toHexString(Integer.parseInt(sTextoSeparado[idx]));
         }
-        
+
         return sTextoSeparado;
     }
 
-    public void criptografarArquivo() {
+    public String SolicitarNomeArquivo() {
         String nome = JOptionPane.showInputDialog("Digite o nome do arquivo que será gerado").trim();
+        if (!nome.endsWith(".txt")) {
+            nome = nome.concat(".txt");
+        }
+        return nome;
+    }
+
+    public void EscreverArquivo(String nomeArquivo, String data) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo));
+        writer.write(data);
+
+        writer.close();
+
+        JOptionPane.showMessageDialog(null, "Arquivo salvo em: \n" + System.getProperty("user.dir").concat("/"+nomeArquivo));
     }
 }

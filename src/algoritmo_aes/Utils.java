@@ -13,18 +13,31 @@ import java.util.Arrays;
  */
 public class Utils {
 
-    public static String getHex(byte[] bytes) {
-        StringBuilder result = new StringBuilder();
-        for (byte aByte : bytes) {
-            result.append(String.format("%02x", aByte));
+    public static String getHex(byte byt) {
+        String ahaha = String.format("%02x", byt);
+        return ahaha;
+    }
+
+    public static String[][] criaMatrizDoBloco(byte[] blocoBytes) {
+        String[][] matriz = new String[4][4];
+
+        int auxCounter = 0;
+        while (auxCounter < 16) {
+            for (int linha = 0; linha < 4; linha++) {
+                for (int coluna = 0; coluna < 4; coluna++) {
+                    matriz[linha][coluna] = getHex(blocoBytes[auxCounter]);
+                    auxCounter++;
+                }
+
+            }
         }
-        return result.toString();
+        return matriz;
     }
 
     public static byte[][] divideArray(byte[] source, int chunksize) {
         boolean novoBloco = source.length % (double) chunksize == 0;
         int qtdLinhas = (int) Math.ceil(source.length / (double) chunksize);
-        if(novoBloco){
+        if (novoBloco) {
             qtdLinhas++;
         }
         byte[][] ret = new byte[qtdLinhas][chunksize];
@@ -39,9 +52,9 @@ public class Utils {
                 //percorrer toda a linha e ver quantos zeros existem
                 for (int idx = 0; idx < chunksize; idx++) {
                     byte byteIdx = ret[i][idx];
-                    if(byteIdx == 0){
+                    if (byteIdx == 0) {
                         countZero++;
-                    }  
+                    }
                 }
                 //percorer novamente toda a linha e setar o pkcs5#
                 for (int idx = 0; idx < chunksize; idx++) {
@@ -54,4 +67,5 @@ public class Utils {
         }
         return ret;
     }
+
 }
