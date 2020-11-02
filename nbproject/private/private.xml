@@ -3,26 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-            <file>file:/F:/Furbosa/8%20Semestre/Sist.%20Desenvolvimento%20Seguros/Criptografia%20-%20AES/algoritmo_aes/src/algoritmo_aes/CriptografiaArquivo.java</file>
-            <file>file:/F:/Furbosa/8%20Semestre/Sist.%20Desenvolvimento%20Seguros/Criptografia%20-%20AES/algoritmo_aes/src/algoritmo_aes/KeyUtils.java</file>
-            <file>file:/F:/Furbosa/8%20Semestre/Sist.%20Desenvolvimento%20Seguros/Criptografia%20-%20AES/algoritmo_aes/src/algoritmo_aes/Algoritmo_aes.java</file>
-=======
-            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/RoundKey.java</file>
-            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/KeyUtils.java</file>
-            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/CriptografiaArquivo.java</file>
-            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/Algoritmo_aes.java</file>
->>>>>>> 1faeecfa4d2b5673858d9fb9f763924d5e0f0551
-=======
             <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Constants.java</file>
             <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Arquivo.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/RoundKey.java</file>
             <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/CriptografiaArquivo.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Algoritmo_aes.java</file>
             <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Utils.java</file>
+            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Algoritmo_aes.java</file>
             <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/KeyUtils.java</file>
->>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>

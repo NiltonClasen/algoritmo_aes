@@ -24,7 +24,7 @@ public class Algoritmo_aes {
 
     private static final int QTD_ROUND_KEY = 10;
     private static final Arquivo arquivo = new Arquivo();
-    private static final int DEBUG = 1;
+    private static final int DEBUG = 0;
     private static final ArrayList<RoundKey> roundKeys = new ArrayList<>();
     private static RoundKey chaveGerador;
     private static final KeyUtils keyUtils = new KeyUtils();
@@ -55,11 +55,6 @@ public class Algoritmo_aes {
 
         File file = new Arquivo().selecionarArquivo();
         int fileBytesSize = 0;
-        int byteCounter = 0;
-        int blocksNumber = 0;
-        boolean needNewByteBlock = false;
-        ArrayList<Byte> bytsToCripto = new ArrayList<>();
-        int pkcs5Num = 0;
 
         try {
             byte[] fileByteContent = Files.readAllBytes(file.toPath());
