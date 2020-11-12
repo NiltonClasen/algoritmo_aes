@@ -5,6 +5,7 @@
  */
 package algoritmo_aes;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 /**
@@ -66,6 +67,16 @@ public class Utils {
             }
         }
         return ret;
+    }
+
+    public static byte[] hexToBin(String hex) {
+        byte[] val = new byte[hex.length() / 2];
+        for (int i = 0; i < val.length; i++) {
+            int index = i * 2;
+            int j = Integer.parseInt(hex.substring(index, index + 2), 16);
+            val[i] = (byte) j;
+        }
+        return val;
     }
 
 }

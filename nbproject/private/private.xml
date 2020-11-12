@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Constants.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Arquivo.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/CriptografiaArquivo.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Utils.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/Algoritmo_aes.java</file>
-            <file>file:/C:/Projetos_git/algoritmo_aes/src/algoritmo_aes/KeyUtils.java</file>
+            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/Utils.java</file>
+            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/KeyUtils.java</file>
+            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/Arquivo.java</file>
+            <file>file:/C:/Users/Nilton/Documents/NetBeansProjects/algoritmo_aes/src/algoritmo_aes/Algoritmo_aes.java</file>
         </group>
     </open-files>
 </project-private>

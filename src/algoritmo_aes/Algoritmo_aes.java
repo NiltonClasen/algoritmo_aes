@@ -63,14 +63,14 @@ public class Algoritmo_aes {
             byte[][] blocos = Utils.divideArray(fileByteContent, 16);
 
             StringBuilder resultadoCriptografia = new StringBuilder();
-
+            String[][] sCriptografado = new String[4][4];
             for (int linha = 0; linha < blocos.length; linha++) {
                 //aqui precisa criar uma nova matriz com a linha
                 //passa a linha inteira de bytes
                 String[][] blocoEmHexa = Utils.criaMatrizDoBloco(blocos[linha]);
 
                 CriptografiaArquivo criptArquivo = new CriptografiaArquivo();
-                String[][] sCriptografado = criptArquivo.IniciaCriptografia(blocoEmHexa, roundKeys);
+                sCriptografado = criptArquivo.IniciaCriptografia(blocoEmHexa, roundKeys);
 
                 //pega o resultado e concatena numa string
                 for (int i = 0; i < sCriptografado.length; i++) {
@@ -81,7 +81,7 @@ public class Algoritmo_aes {
             }
             //quando termina pede a URI para colocar o arquivo
             String nomeArquivo = arquivo.SolicitarNomeArquivo();
-            arquivo.EscreverArquivo(nomeArquivo, resultadoCriptografia.toString());
+            arquivo.EscreverArquivo(nomeArquivo, sCriptografado);
 
         } catch (IOException ex) {
             Logger.getLogger(Algoritmo_aes.class.getName()).log(Level.SEVERE, null, ex);

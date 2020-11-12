@@ -7,8 +7,11 @@ package algoritmo_aes;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -50,12 +53,16 @@ public class Arquivo {
         return nome;
     }
 
-    public void EscreverArquivo(String nomeArquivo, String data) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(nomeArquivo));
-        writer.write(data);
-
-        writer.close();
-
-        JOptionPane.showMessageDialog(null, "Arquivo salvo em: \n" + System.getProperty("user.dir").concat("/"+nomeArquivo));
+    public void EscreverArquivo(String nomeArquivo, String[][] sCriptografado) throws IOException {
+        try (PrintWriter outputWriter = new PrintWriter(new FileWriter(nomeArquivo))) {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    String hex = sCriptografado[i][j];
+                    byte[] bin = Utils.hexToBin(hex);
+                    outputWriter.write(new String(bin));
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Arquivo salvo em: \n" + System.getProperty("user.dir").concat("/" + nomeArquivo));
+        }
     }
 }
