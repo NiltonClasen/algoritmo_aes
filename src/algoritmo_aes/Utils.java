@@ -36,6 +36,7 @@ public class Utils {
     }
 
     public static byte[][] divideArray(byte[] source, int chunksize) {
+        //verifica se precisa de um novo bloco, divide total de bytes por 16, resultando em quantidade de blocos
         boolean novoBloco = source.length % (double) chunksize == 0;
         int qtdLinhas = (int) Math.ceil(source.length / (double) chunksize);
         if (novoBloco) {
