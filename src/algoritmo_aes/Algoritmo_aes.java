@@ -54,15 +54,12 @@ public class Algoritmo_aes {
         }
 
         File file = new Arquivo().selecionarArquivo();
-        int fileBytesSize = 0;
 
         try {
             byte[] fileByteContent = Files.readAllBytes(file.toPath());
-            fileBytesSize = fileByteContent.length;
 
             byte[][] blocos = Utils.divideArray(fileByteContent, 16);
-
-            StringBuilder resultadoCriptografia = new StringBuilder();
+            
             List<String[][]> sCriptografado = new ArrayList<>();
             for (int linha = 0; linha < blocos.length; linha++) {
                 //aqui precisa criar uma nova matriz com a linha

@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.List;
@@ -56,19 +57,21 @@ public class Arquivo {
     }
 
     public void EscreverArquivo(String nomeArquivo, List<String[][]> sCriptografado) throws IOException {
-
-        try (BufferedWriter outputWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(nomeArquivo), "Cp1252"))) {
+        try (OutputStream outputWriter = new FileOutputStream(nomeArquivo)) {
             for (int iCripto = 0; iCripto < sCriptografado.size(); iCripto++) {
                 String[][] aaa = sCriptografado.get(iCripto);
                 for (int i = 0; i < 4; i++) {
                     for (int j = 0; j < 4; j++) {
                         String hex = aaa[i][j];
-                        byte[] bin = Utils.hexToBin(hex);
-                        outputWriter.write(new String(bin));
+                        int intValue = Utils.hexToInt(hex);
+                        try {
+                            outputWriter.write(intValue);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null, "Arquivo salvo em: \n" + System.getProperty("user.dir").concat("/" + nomeArquivo));
         }
     }
 }

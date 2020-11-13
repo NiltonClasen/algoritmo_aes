@@ -14,9 +14,9 @@ import java.util.Arrays;
  */
 public class Utils {
 
-    public static String getHex(byte byt) {
-        String ahaha = String.format("%02x", byt);
-        return ahaha;
+    public static String getHex(byte b) {
+        String sByte = String.format("%02x", b);
+        return sByte;
     }
 
     public static String[][] criaMatrizDoBloco(byte[] blocoBytes) {
@@ -69,14 +69,8 @@ public class Utils {
         return ret;
     }
 
-    public static byte[] hexToBin(String hex) {
-        byte[] val = new byte[hex.length() / 2];
-        for (int i = 0; i < val.length; i++) {
-            int index = i * 2;
-            int j = Integer.parseInt(hex.substring(index, index + 2), 16);
-            val[i] = (byte) j;
-        }
-        return val;
+    public static int hexToInt(String hex) {
+        return Integer.parseInt(hex, 16);
     }
 
 }
